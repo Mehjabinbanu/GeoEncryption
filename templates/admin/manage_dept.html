@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+</head>
+
+<body>
+<form id="form1" name="form1" method="get" action="">
+<h3 align="center">Manage Department</h3>
+  <table width="418" height="122" border="1" align="center">
+    <tr>
+      <td width="86">srl no</td>
+      <td width="175">Department Name</td>
+      <td width="175">Place</td>
+      <td width="175">Latitude</td>
+        <td width="175">Longitude</td>
+      <td width="135">&nbsp;</td>
+    </tr>
+
+      {% for i in n %}
+
+    <tr>
+      <td>&nbsp;{{ loop.index }}</td>
+      <td>&nbsp;{{ i['dept_name'] }}</td>
+      <td>&nbsp;{{ i['place'] }}</td>
+      <td>&nbsp;{{ i['latitude'] }}</td>
+       <td>&nbsp;{{ i['longitude'] }}</td>
+      <td><a href="/admin_edit_dept/{{ i["dept_id"] }}">Edit</a>&nbsp;   <a href="/admin_delete_depat/{{ i["dept_id"] }}">Delete</a></td>
+    </tr>
+
+      {% endfor %}
+
+
+  </table>
+</form>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <form action="/admin_edit_staff_post" method="post" enctype="multipart/form-data" name="form1" id="form1">
+<h2 align="center">Edit Staff</h2>
+  <table width="504" border="0" align="center">
+    <tr>
+      <td width="214">Name<input type="hidden" value="{{ a["lid"] }}" name="lid"></td>
+      <td width="274"><label for="textfield"></label>
+      <input type="text" name="textfield" id="textfield"  value="{{ a["name"] }}"/></td>
+    </tr>
+    <tr>
+      <td>Photo</td>
+      <td><label for="fileField"></label>
+      <input type="file" name="fileField" id="fileField" value="{{ a["photo"] }}" /></td>
+    </tr>
+    <tr>
+      <td>Date of birth</td>
+      <td><label for="textfield2"></label>
+      <input type="date" name="textfield2" id="textfield2" value="{{ a["dob"] }}" /></td>
+    </tr>
+    <tr>
+      <td>Gender</td>
+      <td><p>
+        <input type="radio" name="radio" id="radio" value="male" {% if a["gender"]=="male" %} checked{% endif %} />
+        <label for="radio">Male</label>
+  </p>
+        <p>
+  <input type="radio" name="radio" id="radio2" value="female"  {% if a["gender"]=="female" %} checked{% endif %}/>
+          <label for="radio2">Female</label>
+      </p></td>
+    </tr>
+    <tr>
+      <td>Department</td>
+      <td><label for="select"></label>
+        <select name="select" id="select">
+        <option value="{{ a['dept_id'] }}"> {{ a['dept_name'] }}</option>
+        <option>--select---</option>
+            {% for i in dept %}
+                <option value="{{ i['dept_id'] }}"> {{ i['dept_name'] }}</option>
+
+            {% endfor %}
+      </select></td>
+    </tr>
+    <tr>
+      <td>Designation</td>
+      <td><label for="textfield3"></label>
+      <input type="text" name="textfield3" id="textfield3" value="{{ a["designation"] }}" /></td>
+    </tr>
+    <tr>
+      <td>Qualification</td>
+      <td><label for="textfield4"></label>
+      <input type="text" name="textfield4" id="textfield4"  value="{{ a["qualification"] }}"/></td>
+    </tr>
+    <tr>
+      <td>House Name</td>
+      <td><label for="textfield5"></label>
+        <input type="text" name="textfield5" id="textfield5" value="{{ a["house_name"] }}" /></td>
+    </tr>
+    <tr>
+      <td>Place</td>
+      <td><label for="textfield6"></label>
+        <input type="text" name="textfield6" id="textfield6" value="{{ a["place"] }}" /></td>
+    </tr>
+    <tr>
+      <td>Pin</td>
+      <td><label for="textfield7"></label>
+        <input type="text" name="textfield7" id="textfield7" value="{{ a["pin"] }}"/></td>
+    </tr>
+    <tr>
+      <td>District</td>
+      <td><label for="textfield8"></label>
+        <input type="text" name="textfield8" id="textfield8"value="{{ a["district"] }}" /></td>
+    </tr>
+    <tr>
+      <td>State</td>
+      <td><label for="textfield9"></label>
+        <input type="text" name="textfield9" id="textfield9" value="{{ a["state"] }}" /></td>
+    </tr>
+    <tr>
+      <td>Contact</td>
+      <td><label for="textfield10"></label>
+        <input type="text" name="textfield10" id="textfield10" value="{{ a["contact"] }}" /></td>
+    </tr>
+{#    <tr>#}
+{#      <td>Email</td>#}
+{#      <td><label for="textfield11"></label>#}
+{#        <input type="text" name="textfield11" id="textfield11" value="{{ a["email"] }}"/></td>#}
+{#    </tr>#}
+    <tr>
+      <td>&nbsp;</td>
+      <td><input type="submit" name="button" id="button" value="Update" /></td>
+    </tr>
+  </table>
+</form>
+</body>
+</html>

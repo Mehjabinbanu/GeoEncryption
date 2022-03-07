@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="/admin_edit_work_post" method="post">
+    <h3 align="center">Edit work</h3>
+	  <table width="406" height="172" border="0" align="center">
+	    <tr>
+	      <td width="203">Title<input type="hidden" value="{{ a["work_id"] }}" name="work_id"></td>
+	      <td width="187"><label for="textfield"></label>
+          <input type="text" name="textfield" id="textfield" value="{{ a["title"] }}"/></td>
+        </tr>
+	    <tr>
+	      <td>Description</td>
+	      <td><label for="textfield2"></label>
+          <input type="text" name="textfield2" id="textfield2" value="{{ a["description"] }}"/></td>
+        </tr>
+	    <tr>
+	      <td>Submission Date </td>
+	      <td><label for="textfield3"></label>
+          <input type="date" name="textfield3" id="textfield3" value="{{ a["sdate"] }}"/></td>
+        </tr>
+	    <tr>
+	      <td>Submission Time</td>
+	      <td><label for="textfield4"></label>
+          <input type="text" name="textfield4" id="textfield4" value="{{ a["stime"] }}"/></td>
+        </tr>
+          <tr>
+	      <td>Uploaded Date</td>
+	      <td><label for="textfield5"></label>
+          <input type="date" name="textfield5" id="textfield5" value="{{ a["uploaddate"] }}"/></td>
+        </tr>
+	    <tr>
+	      <td>&nbsp;</td>
+	      <td><input type="submit" name="button" id="button" value="Update" /></td>
+        </tr>
+      </table>
+
+    </form>
+</body>
+</html>

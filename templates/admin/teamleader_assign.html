@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+</head>
+
+<body>
+<form action="/admin_leader_insert" method="post">
+<h2 align="center">Team Leader Assignment</h2>
+<table width="422" height="67" border="0" align="center">
+
+    <tr>
+        <td align="center">Choose department</td>
+        <td><label for="select"></label>
+            <select name="select" id="select">
+            <option>--select--</option>
+                {% for i in department %}
+                <option value="{{ i['dept_id'] }}"> {{ i['dept_name'] }}</option>
+            {% endfor %}
+
+            </select></td>
+  <tr>
+    <td align="center">Staff</td>
+    <td><label for="select"></label>
+      <select name="select2" id="select2">
+      </select></td>
+  </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td><input type="submit" name="button" id="button" value="Assign" /></td>
+    </tr>
+
+</table>
+</form>
+</body>
+</html>
+
+<script src="/static/jquery.js"></script>
+<script>
+
+    $(document).ready(function () {
+        $("#select").change(function () {
+            id=$(this).val();
+
+            $.ajax({
+                url:'/admin_leader_assign_post_ajax',
+                type:'post',
+                dataType:'json',
+                data:{dept_id:id},
+
+                success:function (res) {
+                    data=res["data"]
+                    len=data.length
+
+                     $("#select2").text("")
+                    $("#select2").append('<option value=0>--select--</option>')
+                    for (var i=0;i<=len;i++)
+                    {
+                        lid=data[i]["lid"]
+                        name=data[i]["name"]
+                        $("#select2").append('<option value='+lid+'>'+name+'</option>')
+                    }
+
+                },
+                error:function (res) {
+
+                }
+            });
+        });
+
+    });
+</script>
