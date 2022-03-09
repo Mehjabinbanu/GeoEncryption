@@ -6,23 +6,13 @@
 </head>
 
 <body>
-	<form action="/admin_add_work_post" method="post">
-    <h3 align="center">Add work</h3>
+	<form action="" method="get">
+    <h3 align="center">Subduty Creation </h3>
 	  <table width="406" height="172" border="0" align="center">
 	    <tr>
 	      <td width="203">Title</td>
 	      <td width="187"><label for="textfield"></label>
           <input type="text" name="textfield" id="textfield" /></td>
-        </tr>
-          <tr>
-	      <td>Department</td>
-	      <td><label for="select"></label>
-	        <select name="select" id="select">
-                {% for i in a %}
-                <option value="{{ i['dept_id'] }}"> {{ i['dept_name'] }}</option>
-
-            {% endfor %}
-           </select></td>
         </tr>
 	    <tr>
 	      <td>Description</td>
@@ -34,19 +24,15 @@
 	      <td><label for="textfield3"></label>
           <input type="date" name="textfield3" id="textfield3" /></td>
         </tr>
-	    <tr>
-	      <td>Submission Time</td>
-	      <td><label for="textfield4"></label>
-          <input type="text" name="textfield4" id="textfield4" /></td>
-        </tr>
-          <tr>
-	      <td>Uploaded Date</td>
+	    
+        <tr>
+	      <td>Uploading Date </td>
 	      <td><label for="textfield5"></label>
           <input type="date" name="textfield5" id="textfield5" /></td>
         </tr>
 	    <tr>
 	      <td>&nbsp;</td>
-	      <td><input type="submit" name="button" id="button" value="Submit" /></td>
+	      <td><input type="submit" name="button" id="button" value="Create" /></td>
         </tr>
       </table>
     

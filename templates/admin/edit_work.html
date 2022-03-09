@@ -9,29 +9,43 @@
     <h3 align="center">Edit work</h3>
 	  <table width="406" height="172" border="0" align="center">
 	    <tr>
-	      <td width="203">Title<input type="hidden" value="{{ a["work_id"] }}" name="work_id"></td>
+	      <td width="203">Title<input type="hidden" value="{{ d["work_id"] }}" name="work_id"></td>
 	      <td width="187"><label for="textfield"></label>
-          <input type="text" name="textfield" id="textfield" value="{{ a["title"] }}"/></td>
+          <input type="text" name="textfield" id="textfield" value="{{ d["title"] }}"/></td>
+        </tr>
+          <td>Department</td>
+	      <td><label for="select"></label>
+	        <select name="select" id="select">
+
+                {% for i in a %}
+                    {% if d["dept_id"]==i["dept_id"] %}
+                <option value="{{ i['dept_id'] }}" selected> {{ i['dept_name'] }}</option>
+{% else %}
+                       <option value="{{ i['dept_id'] }}" > {{ i['dept_name'] }}</option>
+                    {% endif %}
+
+            {% endfor %}
+           </select></td>
         </tr>
 	    <tr>
 	      <td>Description</td>
 	      <td><label for="textfield2"></label>
-          <input type="text" name="textfield2" id="textfield2" value="{{ a["description"] }}"/></td>
+          <input type="text" name="textfield2" id="textfield2" value="{{ d["description"] }}"/></td>
         </tr>
 	    <tr>
 	      <td>Submission Date </td>
 	      <td><label for="textfield3"></label>
-          <input type="date" name="textfield3" id="textfield3" value="{{ a["sdate"] }}"/></td>
+          <input type="date" name="textfield3" id="textfield3" value="{{ d["sdate"] }}"/></td>
         </tr>
 	    <tr>
 	      <td>Submission Time</td>
 	      <td><label for="textfield4"></label>
-          <input type="text" name="textfield4" id="textfield4" value="{{ a["stime"] }}"/></td>
+          <input type="text" name="textfield4" id="textfield4" value="{{ d["stime"] }}"/></td>
         </tr>
           <tr>
 	      <td>Uploaded Date</td>
 	      <td><label for="textfield5"></label>
-          <input type="date" name="textfield5" id="textfield5" value="{{ a["uploaddate"] }}"/></td>
+          <input type="date" name="textfield5" id="textfield5" value="{{ d["uploaddate"] }}"/></td>
         </tr>
 	    <tr>
 	      <td>&nbsp;</td>
