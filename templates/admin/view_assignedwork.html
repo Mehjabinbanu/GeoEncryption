@@ -30,15 +30,17 @@
       <td width="121" align="center">Uploading Date</td>
       <td width="121" align="center">&nbsp;</td>
     </tr>
+      {% for i in work %}
+
     <tr>
-      <td>{{ i['title'] }}&nbsp;</td>
+      <td>{{ i['title'] }}</td>
       <td>{{ i['description'] }}&nbsp;</td>
       <td>{{ i['sdate'] }}&nbsp;</td>
       <td>&nbsp;{{ i['stime'] }}</td>
       <td>&nbsp;{{ i['uploaddate'] }}</td>
-      <td><a href="/admin_delete_works/{{ i["work_id"] }}"">Delete</a></td>
+      <td><a href="/admin_delete_assignedworks/{{ i["work_id"] }}">Delete</a></td>
     </tr>
-    
+{% endfor %}
   </table>
   <p align="center">&nbsp;</p>
   <p>&nbsp;</p>

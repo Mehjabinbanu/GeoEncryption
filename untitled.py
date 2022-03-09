@@ -193,10 +193,10 @@ def admin_add_work_post():
     sdate = request.form["textfield3"]
     stime = request.form["textfield4"]
     udate=request.form["textfield5"]
-    qry = "INSERT INTO works(`title`,`description`,`sdate`,`stime`,`uploaded_date`) VALUES ('"+title+"','"+desc+"','"+sdate+"','"+stime+"','"+udate+"')"
+    qry = "INSERT INTO works(`title`,`description`,`sdate`,`stime`,`uploaddate`) VALUES ('"+title+"','"+desc+"','"+sdate+"','"+stime+"','"+udate+"')"
     d = Db()
     d.insert(qry)
-    return '''<script>alert('success');window.location='/admin_add_dept'</script>'''
+    return '''<script>alert('success');window.location='/admin_add_work'</script>'''
 
 @app.route('/admin_manage_work')
 def admin_manage_work():
@@ -328,22 +328,30 @@ def admin_view_assignedwork():
     q = "SELECT team_leader.* ,staff.* FROM team_leader INNER JOIN staff ON staff.lid=team_leader.staff_id "
     d = Db()
     res = d.select(q)
-    return render_template('admin/view_assignedwork.html',leader=res,i="")
+    qry1 = "SELECT `assigned_work`.* ,`works`.* FROM `assigned_work` INNER JOIN `works` ON `works`.`work_id`=`assigned_work`.`work_id`"
+    res1 = d.select(qry1)
+
+    return render_template('admin/view_assignedwork.html',leader=res,i="res1")
 
 @app.route('/admin_view_assignedwork_search',methods=['post'])
 def admin_view_assignedwork_search():
     tid = request.form["select"]
-    qry = "select * from works"
+    qry = "SELECT `assigned_work`.* ,`works`.* FROM `assigned_work` INNER JOIN `works` ON `works`.`work_id`=`assigned_work`.`work_id`  WHERE `assigned_work`.`leader_id`='"+tid+"'"
     d = Db()
-    res = d.selectOne(qry)
+    res = d.select(qry)
 
-    q = "SELECT team_leader.* ,staff.* FROM team_leader INNER JOIN staff ON staff.lid=team_leader.staff_id "
-    res1 = d.select(q)
+    q = "SELECT team_leader.* ,staff.* FROM team_leader INNER JOIN staff ON staff.lid=team_leader.staff_id  WHERE team_leader.leader_id='"+tid+"'"
+    res1=d.select(q)
 
     if res is not None:
-        return render_template('admin/view_assignedwork.html',i=res,a=res1)
+        return render_template('admin/view_assignedwork.html',work=res,a=res1)
     else:
         return "<html><h1 style='color:red'>No work assigned!!!!!!!!!!!!</h1></html>"
 
+def admin_delete_assignedworks(wid):
+    q="DELETE FROM `assigned_work` WHERE `work_id`='"+wid+"'"
+    d=Db()
+    d.delete(q)
+    return '''<script>alert('successfully deleted');window.location='/admin_view_assignedwork'</script>'''
 if __name__ == '__main__':
     app.run(debug=True)
