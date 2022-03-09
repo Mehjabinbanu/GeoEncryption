@@ -6,7 +6,7 @@
 </head>
 
 <body>
-<form id="form1" name="form1" method="post" action="">
+<form id="form1" name="form1" method="post" action="/teamleader_view_profile">
   
   
   <h2 align="center">Profile</h2>
@@ -16,39 +16,43 @@
     </tr>
     <tr>
       <td width="218">Name</td>
-      <td width="214">&nbsp;</td>
+      <td width="214">{{ i['name'] }}</td>
     </tr>
     <tr>
       <td>Date of Birth</td>
-      <td>&nbsp;</td>
+      <td>{{ i['dob'] }}</td>
     </tr>
     <tr>
       <td>Gender</td>
-      <td>&nbsp;</td>
+      <td>&nbsp;{{ i['gender'] }}</td>
     </tr>
       <tr>
       <td>Department</td>
-      <td>&nbsp;</td>
+      <td>&nbsp;{{ i['dept_name'] }}</td>
     </tr>
     <tr>
       <td>Designation</td>
-      <td>&nbsp;</td>
+      <td>&nbsp;{{ i['designation'] }}</td>
     </tr>
     <tr>
       <td>Qualification</td>
-      <td>&nbsp;</td>
+      <td>&nbsp;{{ i['qualification'] }}</td>
     </tr>
     <tr>
       <td>Address</td>
-      <td>&nbsp;</td>
+      <td>{{ i['house_name'] }} <br>
+      {{ i['place'] }}<br>
+      {{ i['pin'] }}<br>
+      {{ i['district'] }}<br>
+    {{ i['state'] }}</td>
     </tr>
     <tr>
       <td>Contact</td>
-      <td>&nbsp;</td>
+      <td>&nbsp;{{ i['contact'] }}</td>
     </tr>
     <tr>
       <td height="44">Email</td>
-      <td>&nbsp;</td>
+      <td>{{ i['email'] }}</td>
     </tr>
     <tr>
       <td height="44">&nbsp;</td>
