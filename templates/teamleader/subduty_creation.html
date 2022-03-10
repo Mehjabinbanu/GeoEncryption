@@ -6,12 +6,12 @@
 </head>
 
 <body>
-	<form action="" method="get">
+	<form action="/teamleader_subduty_creation_post" method="post">
     <h3 align="center">Subduty Creation </h3>
-	  <table width="406" height="172" border="0" align="center">
+	  <table align="center">
 	    <tr>
-	      <td width="203">Title</td>
-	      <td width="187"><label for="textfield"></label>
+            <td>Title<input type="hidden" value="{{ a["work_id"] }}" name="wid"></td>
+	      <td><label for="textfield"></label>
           <input type="text" name="textfield" id="textfield" /></td>
         </tr>
 	    <tr>
@@ -27,8 +27,8 @@
 	    
         <tr>
 	      <td>Uploading Date </td>
-	      <td><label for="textfield5"></label>
-          <input type="date" name="textfield5" id="textfield5" /></td>
+	      <td><label for="textfield4"></label>
+          <input type="date" name="textfield4" id="textfield4" /></td>
         </tr>
 	    <tr>
 	      <td>&nbsp;</td>

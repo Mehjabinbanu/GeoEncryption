@@ -14,23 +14,23 @@
       <td width="91">Title</td>
       <td width="70">Description</td>
       <td width="70">Submission Date </td>
-      <td width="70"> Submission Time</td>
         <td width="70">Uploaded Date</td>
       <td width="70">&nbsp;</td>
       <td width="70">&nbsp;</td>
       <td width="76">&nbsp;</td>
     </tr>
+      {% for i in sub %}
     <tr>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td><a href="#">Edit</a></td>
-      <td><a href="#">Delete</a></td>
+      <td>{{ loop.index }}</td>
+      <td>&nbsp;{{ i['title'] }}</td>
+      <td>&nbsp;{{ i['description'] }}</td>
+      <td>&nbsp;{{ i['sdate'] }}</td>
+      <td>&nbsp;{{ i['udate'] }}</td>
+      <td><a href="/teamleader_edit_subduties/{{ i['sub_id']}}">Edit</a></td>
+      <td><a href="/teamleader_delete_subduties/{{ i['sub_id']}}">Delete</a></td>
       <td><a href="#">Assign</a></td>
     </tr>
+      {% endfor %}
   </table>
 </form>
 

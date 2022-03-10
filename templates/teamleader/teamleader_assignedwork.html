@@ -19,16 +19,17 @@
       <td width="121" align="center">Uploading Date</td>
       <td width="121" align="center">&nbsp;</td>
     </tr>
+      {% for i in work %}
     <tr>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td><a href="#">Subduty creation</a></td>
+      <td>&nbsp;{{ loop.index }}</td>
+      <td>&nbsp;{{ i['title'] }}</td>
+      <td>&nbsp;{{ i['description'] }}</td>
+      <td>&nbsp;{{ i['sdate'] }}</td>
+      <td>&nbsp;{{ i['stime'] }}</td>
+      <td>&nbsp;{{ i['uploaddate'] }}</td>
+      <td><a href="/teamleader_subduty_creation/{{ i['work_id'] }}">Subduty creation</a></td>
     </tr>
-    
+    {% endfor %}
   </table>
 
 </form>
