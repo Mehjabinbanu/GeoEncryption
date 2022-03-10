@@ -1,8 +1,9 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, session
 from dbconnection import Db
 app = Flask(__name__)
 
 staticpath="C:\\Users\\Mumthazlatheef\\PycharmProjects\\untitled\\static\\"
+app.secret_key="kkkk"
 
 @app.route('/')
 def login():
@@ -18,6 +19,9 @@ def login_post():
     if res is not None:
         if res['type']=="admin":
             return render_template("admin/Home.html")
+        elif res['type']=="leader":
+            session["lid"]=res["lid"]
+            return render_template("teamleader/Home.html")
         else:
             return "<script>alert('Invalid username or password'); window.location='/'</script>"
     else:
@@ -184,23 +188,27 @@ def admin_delete_staff(sid):
 
 @app.route('/admin_add_work')
 def admin_add_work():
-    return render_template('admin/add_work.html')
+    qry = "select * from department"
+    d = Db()
+    res = d.select(qry)
+    return render_template('admin/add_work.html',a=res)
 
 @app.route('/admin_add_work_post',methods=["post"])
 def admin_add_work_post():
     title = request.form["textfield"]
+    dep=request.form["select"]
     desc = request.form["textfield2"]
     sdate = request.form["textfield3"]
     stime = request.form["textfield4"]
     udate=request.form["textfield5"]
-    qry = "INSERT INTO works(`title`,`description`,`sdate`,`stime`,`uploaddate`) VALUES ('"+title+"','"+desc+"','"+sdate+"','"+stime+"','"+udate+"')"
+    qry = "INSERT INTO works(`title`,`dept_id`,`description`,`sdate`,`stime`,`uploaddate`) VALUES ('"+title+"','"+dep+"','"+desc+"','"+sdate+"','"+stime+"','"+udate+"')"
     d = Db()
     d.insert(qry)
     return '''<script>alert('success');window.location='/admin_add_work'</script>'''
 
 @app.route('/admin_manage_work')
 def admin_manage_work():
-    qry = "select * from works"
+    qry = "SELECT works.*,`department`.`dept_name`  FROM works INNER JOIN department ON `department`.`dept_id`=`works`.`dept_id` "
     d = Db()
     res = d.select(qry)
     return render_template('admin/manage_work.html',a=res)
@@ -210,17 +218,21 @@ def admin_edit_works(workid):
     q = "select * from works WHERE work_id='"+workid+"'"
     d = Db()
     res=d.selectOne(q)
-    return render_template('admin/edit_work.html', a=res)
+    qry = "select * from department"
+    d = Db()
+    res1 = d.select(qry)
+    return render_template('admin/edit_work.html', a=res1,d=res)
 
 @app.route('/admin_edit_work_post',methods=['post'])
 def admin_edit_work_post():
     workid=request.form["work_id"]
     title = request.form["textfield"]
+    dep=request.form["select"]
     desc = request.form["textfield2"]
     sdate = request.form["textfield3"]
     stime = request.form["textfield4"]
     udate = request.form["textfield5"]
-    q="UPDATE works SET `title`='"+title+"',`description`='"+desc+"',`sdate`='"+sdate+"',`stime`='"+stime+"',`uploaddate`='"+udate+"' WHERE work_id='"+workid+"'"
+    q="UPDATE works SET `title`='"+title+"',`dept_id`='"+dep+"',`description`='"+desc+"',`sdate`='"+sdate+"',`stime`='"+stime+"',`uploaddate`='"+udate+"' WHERE work_id='"+workid+"'"
     d=Db()
     d.update(q)
     return '''<script>alert('successfully updated');window.location='/admin_manage_work'</script>'''
@@ -331,7 +343,7 @@ def admin_view_assignedwork():
     qry1 = "SELECT `assigned_work`.* ,`works`.* FROM `assigned_work` INNER JOIN `works` ON `works`.`work_id`=`assigned_work`.`work_id`"
     res1 = d.select(qry1)
 
-    return render_template('admin/view_assignedwork.html',leader=res,i="res1")
+    return render_template('admin/view_assignedwork.html',leader=res,i=res1)
 
 @app.route('/admin_view_assignedwork_search',methods=['post'])
 def admin_view_assignedwork_search():
@@ -344,14 +356,27 @@ def admin_view_assignedwork_search():
     res1=d.select(q)
 
     if res is not None:
-        return render_template('admin/view_assignedwork.html',work=res,a=res1)
+        q = "SELECT team_leader.* ,staff.* FROM team_leader INNER JOIN staff ON staff.lid=team_leader.staff_id "
+        d = Db()
+        ress = d.select(q)
+        return render_template('admin/view_assignedwork.html',work=res,a=res1,leader=ress)
     else:
         return "<html><h1 style='color:red'>No work assigned!!!!!!!!!!!!</h1></html>"
 
+@app.route('/admin_delete_assignedworks/<wid>')
 def admin_delete_assignedworks(wid):
     q="DELETE FROM `assigned_work` WHERE `work_id`='"+wid+"'"
     d=Db()
     d.delete(q)
     return '''<script>alert('successfully deleted');window.location='/admin_view_assignedwork'</script>'''
+
+@app.route('/teamleader_view_profile')
+def teamleader_view_profile():
+    q="SELECT `login`.`lid`,`staff`.* FROM `login` INNER JOIN  `staff` ON `staff`.`lid`=`login`.`lid` WHERE staff.lid='"+str(session["lid"])+"'"
+    d=Db()
+    res=d.selectOne(q)
+    return render_template('teamleader/view_profile.html',i=res)
+
+
 if __name__ == '__main__':
     app.run(debug=True)
