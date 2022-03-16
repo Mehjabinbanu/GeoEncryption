@@ -18,6 +18,9 @@
       <td width="93" align="center">Submission Time</td>
       <td width="121" align="center">Uploading Date</td>
       <td width="121" align="center">&nbsp;</td>
+        <td width="121" align="center">&nbsp;</td>
+        <td width="121" align="center">&nbsp;</td>
+
     </tr>
       {% for i in work %}
     <tr>
@@ -28,6 +31,8 @@
       <td>&nbsp;{{ i['stime'] }}</td>
       <td>&nbsp;{{ i['uploaddate'] }}</td>
       <td><a href="/teamleader_subduty_creation/{{ i['work_id'] }}">Subduty creation</a></td>
+    <td><a href="/teamleader_manage_subduties/{{ i['work_id'] }}">View Subduties</a></td>
+    <td><a href="/teamleader_upload_status">Upload Status </a></td>
     </tr>
     {% endfor %}
   </table>

@@ -6,18 +6,21 @@
 </head>
 
 <body>
-<form id="form1" name="form1" method="post" action="">
+<form id="form1" name="form1" method="post" action="/teamleader_assigned_subduty_search">
   <table width="480" height="54" border="0" align="center">
     <tr>
       <td width="130">Staff</td>
       <td width="156"><label for="select"></label>
         <select name="select" id="select"><option>--Select--</option>
+            {% for i in staff %}
+          <option value="{{ i['staff_id'] }}"> {{ i['name'] }}</option>
+          {% endfor %}
       </select></td>
       <td width="172"><input type="submit" name="button" id="button" value="View" /></td>
     </tr>
   </table>
   
-  <h2 align="center">Assigned work</h2>
+  <h2 align="center">Assigned subduties</h2>
   <table width="766" height="204" border="1" align="center">
     <tr>
       <td width="64" align="center">No</td>
@@ -25,18 +28,22 @@
       <td width="177" align="center">Description</td>
       <td width="124" align="center">Submission Date</td>
       <td width="121" align="center">Uploading Date</td>
-      <td width="121" align="center">&nbsp;</td>
+      <td width="121" align="center">&nbsp;
+        <td width="121" align="center">&nbsp;</td>
     </tr>
+    {% for i in sub %}
+
     <tr>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
+      <td>{{ loop.index }}</td>
+      <td>{{ i['title'] }}</td>
+      <td>{{ i['description'] }}</td>
       
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td><a href="#">Delete</a></td>
+      <td>{{ i['sdate'] }}</td>
+      <td>{{ i['udate'] }}</td>
+        <td><a href="#">View status</a></td>
+      <td><a href="/teamleader_delete_assignedsubduty/{{ i["sub_id"] }}">Delete</a></td>
     </tr>
-    
+    {% endfor %}
   </table>
   <p align="center">&nbsp;</p>
   <p>&nbsp;</p>

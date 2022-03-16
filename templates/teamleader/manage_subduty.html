@@ -6,7 +6,7 @@
 </head>
 
 <body>
-<form id="form1" name="form1" method="post" action="">
+<form id="form1" name="form1" method="post" action="/teamleader_manage_subduties">
 <h2 align="center">Manage Subduty</h2>
   <table width="618" height="117" border="1" align="center">
     <tr>
@@ -28,7 +28,7 @@
       <td>&nbsp;{{ i['udate'] }}</td>
       <td><a href="/teamleader_edit_subduties/{{ i['sub_id']}}">Edit</a></td>
       <td><a href="/teamleader_delete_subduties/{{ i['sub_id']}}">Delete</a></td>
-      <td><a href="#">Assign</a></td>
+      <td><a href="/teamleader_assign_subduty/{{ i['sub_id'] }}">Assign</a></td>
     </tr>
       {% endfor %}
   </table>

@@ -21,6 +21,10 @@ def login_post():
             return render_template("admin/Home.html")
         elif res['type']=="leader":
             session["lid"]=res["lid"]
+            q="SELECT dept_id FROM team_leader WHERE staff_id='"+str(session["lid"])+"'"
+            d=Db()
+            r=d.selectOne(q)
+            session["dpid"]=r["dept_id"]
             return render_template("teamleader/Home.html")
         else:
             return "<script>alert('Invalid username or password'); window.location='/'</script>"
@@ -180,7 +184,7 @@ def admin_edit_staff_post():
 
 @app.route('/admin_delete_staff/<sid>')
 def admin_delete_staff(sid):
-    q="DELETE FROM staff WHERE staff_id='"+sid+"'"
+    q="DELETE FROM staff WHERE lid='"+sid+"'"
     d=Db()
     d.delete(q)
     return '''<script>alert('successfully deleted');window.location='/admin_manage_staff'</script>'''
@@ -340,10 +344,10 @@ def admin_view_assignedwork():
     q = "SELECT team_leader.* ,staff.* FROM team_leader INNER JOIN staff ON staff.lid=team_leader.staff_id "
     d = Db()
     res = d.select(q)
-    qry1 = "SELECT `assigned_work`.* ,`works`.* FROM `assigned_work` INNER JOIN `works` ON `works`.`work_id`=`assigned_work`.`work_id`"
-    res1 = d.select(qry1)
+    # qry1 = "SELECT `assigned_work`.* ,`works`.* FROM `assigned_work` INNER JOIN `works` ON `works`.`work_id`=`assigned_work`.`work_id`"
+    # res1 = d.select(qry1)
 
-    return render_template('admin/view_assignedwork.html',leader=res,i=res1)
+    return render_template('admin/view_assignedwork.html',leader=res)
 
 @app.route('/admin_view_assignedwork_search',methods=['post'])
 def admin_view_assignedwork_search():
@@ -352,14 +356,16 @@ def admin_view_assignedwork_search():
     d = Db()
     res = d.select(qry)
 
-    q = "SELECT team_leader.* ,staff.* FROM team_leader INNER JOIN staff ON staff.lid=team_leader.staff_id  WHERE team_leader.leader_id='"+tid+"'"
-    res1=d.select(q)
+    print(qry)
+
+    # q = "SELECT team_leader.* ,staff.* FROM team_leader INNER JOIN staff ON staff.lid=team_leader.staff_id  WHERE team_leader.leader_id='"+tid+"'"
+    # res1=d.select(q)
 
     if res is not None:
         q = "SELECT team_leader.* ,staff.* FROM team_leader INNER JOIN staff ON staff.lid=team_leader.staff_id "
         d = Db()
         ress = d.select(q)
-        return render_template('admin/view_assignedwork.html',work=res,a=res1,leader=ress)
+        return render_template('admin/view_assignedwork.html',work=res,leader=ress)
     else:
         return "<html><h1 style='color:red'>No work assigned!!!!!!!!!!!!</h1></html>"
 
@@ -377,6 +383,129 @@ def teamleader_view_profile():
     res=d.selectOne(q)
     return render_template('teamleader/view_profile.html',i=res)
 
+@app.route('/teamleader_view_assignedwork')
+def teamleader_view_assignedwork():
+    q="SELECT `assigned_work`.* ,`works`.* FROM `assigned_work` INNER JOIN `works` ON `works`.`work_id`=`assigned_work`.`work_id` where assigned_work.leader_id='"+str(session["lid"])+"'"
+    d=Db()
+    res=d.select(q)
+    print(res)
+    print(q)
+    return render_template('teamleader/teamleader_assignedwork.html',work=res)
+
+@app.route('/teamleader_subduty_creation/<id>')
+def teamleader_subduty_creation(id):
+    q="SELECT `assigned_work`.* ,`works`.* FROM `assigned_work` INNER JOIN `works` ON `works`.`work_id`=`assigned_work`.`work_id` WHERE assigned_work.leader_id='"+str(session["lid"])+"' and works.work_id='"+id+"'"
+    d=Db()
+    res=d.selectOne(q)
+    print(res)
+    return render_template('teamleader/subduty_creation.html',a=res)
+
+@app.route('/teamleader_subduty_creation_post',methods=['post'])
+def teamleader_subduty_creation_post():
+    workid = request.form['wid']
+    print("-----------",workid)
+    title=request.form['textfield']
+    desc=request.form['textfield2']
+    sdate=request.form['textfield3']
+    udate=request.form['textfield4']
+    d = Db()
+
+    qry="INSERT INTO `subduties` (`work_id`,`title`,`description`,`sdate`,`udate`) VALUES ('"+workid+"','"+title+"','"+desc+"','"+sdate+"','"+udate+"')"
+    print(qry)
+    res = d.insert(qry)
+    print(res)
+    return '''<script>alert('success');window.location='/teamleader_view_assignedwork'</script>'''
+
+@app.route('/teamleader_manage_subduties/<subid>')
+def teamleader_manage_subduties(subid):
+    # qry="SELECT subduties.*,assigned_work.* FROM subduties INNER JOIN assigned_work ON assigned_work.work_id=subduties.work_id WHERE  assigned_work.leader_id='"+str(session["lid"])+"' and subduties.sub_id='"+subid+"'"
+    # d=Db()
+    # res=d.select(qry)
+
+
+    q="SELECT * FROM subduties WHERE work_id='"+subid+"'"
+    d=Db()
+    res=d.select(q)
+    return render_template('teamleader/manage_subduty.html',sub=res)
+
+
+@app.route('/teamleader_edit_subduties/<subid>')
+def teamleader_edit_subduties(subid):
+    q="SELECT subduties.*,assigned_work.* FROM subduties INNER JOIN assigned_work ON assigned_work.work_id=subduties.work_id WHERE  assigned_work.leader_id='"+str(session["lid"])+"' and subduties.sub_id='"+subid+"'"
+    print(q)
+    d=Db()
+    res=d.selectOne(q)
+    return render_template('teamleader/edit_subduty.html',sd=res)
+
+@app.route('/teamleader_edit_subduties_post',methods=['post'])
+def teamleader_edit_subduties_post():
+    subid = request.form["sub_id"]
+    title = request.form["textfield"]
+    desc = request.form["textfield2"]
+    sdate = request.form["textfield3"]
+    udate = request.form["textfield4"]
+    qry="UPDATE subduties SET `title`='"+title+"',`description`='"+desc+"',`sdate`='"+sdate+"',`udate`='"+udate+"' WHERE sub_id='"+subid+"'"
+    d = Db()
+    d.update(qry)
+    return '''<script>alert('successfully updated');window.location='/teamleader_manage_subduties'</script>'''
+
+@app.route('/teamleader_delete_subduties/<subid>')
+
+def teamleader_delete_subduties(subid):
+    q="DELETE FROM subduties WHERE sub_id='"+subid+"'"
+    d=Db()
+    d.delete(q)
+    return '''<script>alert('successfully deleted');window.location='/teamleader_manage_subduties'</script>'''
+
+@app.route('/teamleader_assign_subduty/<subid>')
+def teamleader_assign_subduty(subid):
+    q="select staff.* from staff where department='"+str(session["dpid"])+"'"
+    d = Db()
+    res = d.select(q)
+    print(subid)
+    return render_template('teamleader/assign_staff.html.', staff=res,sid=subid)
+
+
+@app.route('/teamleader_assign_subduty_insert', methods=['post'])
+def teamleaer_assign_subduty_insert():
+    sid = request.form['select']
+    subid= request.form['sub_id']
+    q = "INSERT INTO `assigned_subduty`(`sub_id`,`staff_id`,`date`)VALUES('" + subid + "','" + sid + "',curdate())"
+    d = Db()
+    d.insert(q)
+    return '''<script>alert('successfully assigned');window.location='/teamleader_view_assignedwork'</script>'''
+
+@app.route('/teamleader_view_assigned_subduty')
+def teamleader_view_assigned_subduty():
+    q = "select staff.* from staff where department='"+str(session["dpid"])+"'"
+    d = Db()
+    res = d.select(q)
+    return render_template('teamleader/view_subduty.html', staff=res)
+
+@app.route('/teamleader_assigned_subduty_search',methods=['post'])
+def teamleader_assigned_subduty_search():
+    sid = request.form["select"]
+    qry = "SELECT `assigned_subduty`.* ,`subduties`.* FROM `assigned_subduty` INNER JOIN `subduties` ON `subduties`.`sub_id`=`assigned_subduty`.`sub_id`  WHERE `assigned_subduty`.`staff_id`='" + sid + "'"
+    d = Db()
+    res = d.select(qry)
+    if res is not None:
+        q = "select staff.* from staff where department='"+str(session["dpid"])+"'"
+        d = Db()
+        ress = d.select(q)
+        return render_template('teamleader/view_subduty.html',sub=res,staff=ress)
+    else:
+        return "<html><h1 style='color:red'>No work assigned!!!!!!!!!!!!</h1></html>"
+
+@app.route('/teamleader_delete_assignedsubduty/<subid>')
+def teamleader_delete_assignedsubduty(subid):
+    q = "DELETE FROM `assigned_subduty` WHERE `sub_id`='" + subid + "'"
+    d = Db()
+    d.delete(q)
+    return '''<script>alert('successfully deleted');window.location='/teamleader_view_assigned_subduty'</script>'''
+
+@app.route('/teamleader_upload_status')
+def teamleader_upload_status():
+    return render_template('teamleader/upload_status.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

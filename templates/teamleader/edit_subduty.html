@@ -5,29 +5,29 @@
     <title>edit_subduty</title>
 </head>
 <body>
-<form action="" method="post">
+<form action="/teamleader_edit_subduties_post" method="post">
     <h3 align="center">Edit subduty</h3>
 	  <table width="406" height="172" border="0" align="center">
 	    <tr>
-	      <td width="203">Title</td>
+	      <td width="203">Title<input type="hidden" value="{{ sd["sub_id"] }}" name="sub_id"></td>
 	      <td width="187"><label for="textfield"></label>
-          <input type="text" name="textfield" id="textfield" value=""></td>
+          <input type="text" name="textfield" id="textfield" value="{{ sd["title"] }}"></td>
         </tr>
 	    <tr>
 	      <td>Description</td>
 	      <td><label for="textfield2"></label>
-          <input type="text" name="textfield2" id="textfield2" value=""/></td>
+          <input type="text" name="textfield2" id="textfield2" value="{{ sd["description"] }}"/></td>
         </tr>
 	    <tr>
 	      <td>Submission Date </td>
 	      <td><label for="textfield3"></label>
-          <input type="date" name="textfield3" id="textfield3" value=""/></td>
+          <input type="date" name="textfield3" id="textfield3" value="{{ sd["sdate"] }}"/></td>
         </tr>
 	    
           <tr>
 	      <td>Uploaded Date</td>
-	      <td><label for="textfield5"></label>
-          <input type="date" name="textfield5" id="textfield5" value=""/></td>
+	      <td><label for="textfield4"></label>
+          <input type="date" name="textfield4" id="textfield4" value="{{ sd["udate"] }}"/></td>
         </tr>
 	    <tr>
 	      <td>&nbsp;</td>
