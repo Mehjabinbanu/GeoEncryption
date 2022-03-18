@@ -5,15 +5,15 @@
 <title>Untitled Document</title>
 </head>
 
-<body><form action="/admin_view_status" method="post"><table width="307" border="1" align="center">
+<body><form action="/teamleader_view_status" method="post"><table width="307" border="1" align="center">
   <tr>
     <td width="92">Status</td>
-      <td width="199"><a href="#"></a></td>
+      <td width="199"><a href="{{ i['file']}}" download >{{ i['file']}}</a></td>
 
   </tr>
   <tr>
     <td>Description</td>
-    <td>&nbsp</td>
+    <td>&nbsp;{{ i['description'] }}</td>
   </tr>
 </table>
 </form>

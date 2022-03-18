@@ -40,7 +40,7 @@
       
       <td>{{ i['sdate'] }}</td>
       <td>{{ i['udate'] }}</td>
-        <td><a href="#">View status</a></td>
+        <td><a href="/teamleader_view_status/{{ i["sub_id"] }}">View status</a></td>
       <td><a href="/teamleader_delete_assignedsubduty/{{ i["sub_id"] }}">Delete</a></td>
     </tr>
     {% endfor %}
