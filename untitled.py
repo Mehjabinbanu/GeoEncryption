@@ -6,6 +6,10 @@ staticpath="C:\\Users\\Mumthazlatheef\\PycharmProjects\\untitled\\static\\"
 app.secret_key="kkkk"
 
 @app.route('/')
+def index_login():
+    return render_template('index.html')
+
+@app.route('/login')
 def login():
    return render_template('login.html')
 
@@ -369,6 +373,14 @@ def admin_view_assignedwork_search():
     else:
         return "<html><h1 style='color:red'>No work assigned!!!!!!!!!!!!</h1></html>"
 
+@app.route('/admin_view_status/<wid>')
+def admin_view_status(wid):
+    q="select assigned_work.*,teamleader_status.* from teamleader_status INNER JOIN assigned_work ON assigned_work.work_id=teamleader_status.work_id WHERE assigned_work.work_id='"+wid+"'"
+    d=Db()
+    res=d.selectOne(q)
+    return render_template('admin/view_status.html',i=res,wid=wid)
+
+
 @app.route('/admin_delete_assignedworks/<wid>')
 def admin_delete_assignedworks(wid):
     q="DELETE FROM `assigned_work` WHERE `work_id`='"+wid+"'"
@@ -383,6 +395,25 @@ def teamleader_view_profile():
     res=d.selectOne(q)
     return render_template('teamleader/view_profile.html',i=res)
 
+@app.route('/teamleader_changepassword')
+def teamleader_changepassword():
+    return render_template("teamleader/change_password.html")
+
+@app.route('/teamleader_changepassword_post',methods=['post'])
+def teamleader_changepassword_post():
+    old=request.form['textfield']
+    new=request.form['textfield2']
+    cn=request.form['textfield3']
+    d = Db()
+    qry1="select * from login where password='"+old+"'"
+    res1=d.selectOne(qry1)
+    if(new==cn):
+        qry="UPDATE login SET PASSWORD='"+cn+"' WHERE lid='"+str(session["lid"])+"'"
+        res=d.update(qry)
+        return '''<script>alert('Password Changed ');window.location='/'</script>'''
+    else:
+        return '''<script>alert('Error');window.location='/teamleader_changepassword'</script>'''
+
 @app.route('/teamleader_view_assignedwork')
 def teamleader_view_assignedwork():
     q="SELECT `assigned_work`.* ,`works`.* FROM `assigned_work` INNER JOIN `works` ON `works`.`work_id`=`assigned_work`.`work_id` where assigned_work.leader_id='"+str(session["lid"])+"'"
@@ -391,6 +422,26 @@ def teamleader_view_assignedwork():
     print(res)
     print(q)
     return render_template('teamleader/teamleader_assignedwork.html',work=res)
+
+@app.route('/teamleader_upload_status/<wid>')
+def teamleader_upload_status(wid):
+    q="SELECT `assigned_work`.* ,`works`.* FROM `assigned_work` INNER JOIN `works` ON `works`.`work_id`=`assigned_work`.`work_id` where assigned_work.leader_id='"+str(session["lid"])+"' and works.work_id='"+wid+"'"
+    d=Db()
+    res=d.selectOne(q)
+    return render_template('teamleader/upload_status.html',a=res,wid=wid)
+
+@app.route('/teamleader_upload_status_insert',methods=['post'])
+def teamleader_upload_status_insert():
+    wid=request.form['work_id']
+    file=request.files['fileField']
+    file.save(staticpath + "status\\" + file.filename)
+    url = "/static/status/" + file.filename
+    desc=request.form['textfield']
+    q = "INSERT INTO `teamleader_status`(`work_id`,`file`,`description`)VALUES('" + wid + "','" + url + "','"+desc+"')"
+    d = Db()
+    d.insert(q)
+    return '''<script>alert('successfully uploaded');window.location='/teamleader_view_assignedwork'</script>'''
+
 
 @app.route('/teamleader_subduty_creation/<id>')
 def teamleader_subduty_creation(id):
@@ -496,6 +547,13 @@ def teamleader_assigned_subduty_search():
     else:
         return "<html><h1 style='color:red'>No work assigned!!!!!!!!!!!!</h1></html>"
 
+@app.route('/teamleader_view_status/<sub_id>')
+def teamleader_view_status(sub_id):
+    q="select assigned_subduty.*,staff_status.* from staff_status INNER JOIN assigned_subduty ON assigned_subduty.sub_id=staff_status.sub_id WHERE assigned_subduty.sub_id='"+sub_id+"'"
+    d=Db()
+    res=d.selectOne(q)
+    return render_template('teamleader/view_status.html',i=res,sid=sub_id)
+
 @app.route('/teamleader_delete_assignedsubduty/<subid>')
 def teamleader_delete_assignedsubduty(subid):
     q = "DELETE FROM `assigned_subduty` WHERE `sub_id`='" + subid + "'"
@@ -503,9 +561,7 @@ def teamleader_delete_assignedsubduty(subid):
     d.delete(q)
     return '''<script>alert('successfully deleted');window.location='/teamleader_view_assigned_subduty'</script>'''
 
-@app.route('/teamleader_upload_status')
-def teamleader_upload_status():
-    return render_template('teamleader/upload_status.html')
+
 
 if __name__ == '__main__':
     app.run(debug=True)
