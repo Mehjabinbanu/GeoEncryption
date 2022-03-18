@@ -39,7 +39,7 @@
       <td>{{ i['sdate'] }}&nbsp;</td>
       <td>&nbsp;{{ i['stime'] }}</td>
       <td>&nbsp;{{ i['uploaddate'] }}</td>
-        <td><a href="#">View status</a></td>
+        <td><a href="/admin_view_status/{{ i["work_id"] }}">View status</a></td>
       <td><a href="/admin_delete_assignedworks/{{ i["work_id"] }}">Delete</a></td>
     </tr>
 {% endfor %}

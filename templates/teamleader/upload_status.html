@@ -6,12 +6,17 @@
 </head>
 
 <body>
-<form action="" method="post" enctype="multipart/form-data" name="form1" id="form1">
+<form action="/teamleader_upload_status_insert" method="post" enctype="multipart/form-data" name="form1" id="form1">
 <table width="433" height="125" border="0" align="center">
   <tr>
-    <td width="145">Status</td>
+    <td width="145">Status<input type="hidden" value="{{ a['work_id'] }}" name="work_id"></td>
     <td width="272"><label for="fileField"></label>
       <input type="file" name="fileField" id="fileField" value="Choose File"/></td>
+  </tr>
+    <tr>
+    <td>Description</td>
+    <td><label for="textfield"></label>
+      <input type="text" name="textfield" id="textfield" /></td>
   </tr>
   <tr>
     <td>&nbsp;</td>
