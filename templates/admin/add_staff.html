@@ -1,22 +1,21 @@
 {% extends "admin/index.html" %}
 {% block body %}
 <form action="/admin_add_staff_post" method="post" enctype="multipart/form-data" name="form1" id="form1">
-<h2 align="center">Add Staff</h2>
-  <table width="504" border="0" align="center">
-    <tr>
+<h3 align="left" >Add Staff</h3>
+  <table class="table">
       <td width="214">Name</td>
-      <td width="274"><label for="textfield"></label>
-      <input type="text" name="textfield" id="textfield" /></td>
+      <td>
+      <input type="text" name="textfield" id="textfield" class="form-control" /></td>
     </tr>
     <tr>
       <td>Photo</td>
-      <td><label for="fileField"></label>
-      <input type="file" name="fileField" id="fileField" /></td>
+      <td>
+      <input type="file" name="fileField" id="fileField" class="form-control"/></td>
     </tr>
     <tr>
       <td>Date of birth</td>
-      <td><label for="textfield2"></label>
-      <input type="date" name="textfield2" id="textfield2" /></td>
+      <td>
+      <input type="date" name="textfield2" id="textfield2" class="form-control" /></td>
     </tr>
     <tr>
       <td>Gender</td>
@@ -31,8 +30,8 @@
     </tr>
     <tr>
       <td>Department</td>
-      <td><label for="select"></label>
-        <select name="select" id="select">
+      <td>
+        <select name="select" id="select" class="form-control">
             {% for i in a %}
                 <option value="{{ i['dept_id'] }}"> {{ i['dept_name'] }}</option>
 
@@ -41,52 +40,52 @@
     </tr>
     <tr>
       <td>Designation</td>
-      <td><label for="textfield3"></label>
-      <input type="text" name="textfield3" id="textfield3" /></td>
+      <td>
+      <input type="text" name="textfield3" id="textfield3" class="form-control"/></td>
     </tr>
     <tr>
       <td>Qualification</td>
-      <td><label for="textfield4"></label>
-      <input type="text" name="textfield4" id="textfield4" /></td>
+      <td>
+      <input type="text" name="textfield4" id="textfield4" class="form-control"/></td>
     </tr>
     <tr>
       <td>House Name</td>
-      <td><label for="textfield5"></label>
-        <input type="text" name="textfield5" id="textfield5" /></td>
+      <td>
+        <input type="text" name="textfield5" id="textfield5" class="form-control"/></td>
     </tr>
     <tr>
       <td>Place</td>
-      <td><label for="textfield6"></label>
-        <input type="text" name="textfield6" id="textfield6" /></td>
+      <td>
+        <input type="text" name="textfield6" id="textfield6" class="form-control"/></td>
     </tr>
     <tr>
       <td>Pin</td>
-      <td><label for="textfield7"></label>
-        <input type="text" name="textfield7" id="textfield7" /></td>
+      <td>
+        <input type="text" name="textfield7" id="textfield7" class="form-control" /></td>
     </tr>
     <tr>
       <td>District</td>
-      <td><label for="textfield8"></label>
-        <input type="text" name="textfield8" id="textfield8" /></td>
+      <td>
+        <input type="text" name="textfield8" id="textfield8" class="form-control"/></td>
     </tr>
     <tr>
       <td>State</td>
-      <td><label for="textfield9"></label>
-        <input type="text" name="textfield9" id="textfield9" /></td>
+      <td>
+        <input type="text" name="textfield9" id="textfield9"class="form-control" /></td>
     </tr>
     <tr>
       <td>Contact</td>
-      <td><label for="textfield10"></label>
-        <input type="text" name="textfield10" id="textfield10" /></td>
+      <td>
+        <input type="text" name="textfield10" id="textfield10" class="form-control"/></td>
     </tr>
     <tr>
       <td>Email</td>
-      <td><label for="textfield11"></label>
-        <input type="text" name="textfield11" id="textfield11" /></td>
+      <td>
+        <input type="text" name="textfield11" id="textfield11" class="form-control"/></td>
     </tr>
     <tr>
       <td>&nbsp;</td>
-      <td><input type="submit" name="button" id="button" value="Submit" /></td>
+      <td><input type="submit" name="button" id="button" value="Submit" class="btn btn-success" /></td>
     </tr>
   </table>
 </form>

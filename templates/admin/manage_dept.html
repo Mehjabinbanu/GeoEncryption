@@ -2,14 +2,14 @@
 {% block body %}
 <form id="form1" name="form1" method="get" action="">
 <h3 align="center">Manage Department</h3>
-  <table width="418" height="122" border="1" align="center">
+  <table class="table table-bordered">
     <tr>
-      <td width="86">srl no</td>
-      <td width="175">Department Name</td>
-      <td width="175">Place</td>
-      <td width="175">Latitude</td>
-        <td width="175">Longitude</td>
-      <td width="135">&nbsp;</td>
+      <th width="86">srl no</th>
+      <th width="175">Department Name</th>
+      <th width="175">Place</th>
+      <th width="175">Latitude</th>
+        <th width="175">Longitude</th>
+      <th width="135">&nbsp;</th>
     </tr>
 
       {% for i in n %}
@@ -20,7 +20,7 @@
       <td>&nbsp;{{ i['place'] }}</td>
       <td>&nbsp;{{ i['latitude'] }}</td>
        <td>&nbsp;{{ i['longitude'] }}</td>
-      <td><a href="/admin_edit_dept/{{ i["dept_id"] }}">Edit</a>&nbsp;   <a href="/admin_delete_depat/{{ i["dept_id"] }}">Delete</a></td>
+      <td><a href="/admin_edit_dept/{{ i["dept_id"] }}" class="btn btn-outline-info">Edit</a>&nbsp;   <a href="/admin_delete_depat/{{ i["dept_id"] }}" class="btn btn-outline-danger">Delete</a></td>
     </tr>
 
       {% endfor %}

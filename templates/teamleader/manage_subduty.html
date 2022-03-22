@@ -1,23 +1,17 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Untitled Document</title>
-</head>
-
-<body>
+{% extends "teamleader/index.html" %}
+{% block body %}
 <form id="form1" name="form1" method="post" action="/teamleader_manage_subduties">
-<h2 align="center">Manage Subduty</h2>
-  <table width="618" height="117" border="1" align="center">
+<h3 align="center">Manage Subduty</h3>
+  <table class="table table-bordered">
     <tr>
-      <td width="49">No</td>
-      <td width="91">Title</td>
-      <td width="70">Description</td>
-      <td width="70">Submission Date </td>
-        <td width="70">Uploaded Date</td>
-      <td width="70">&nbsp;</td>
-      <td width="70">&nbsp;</td>
-      <td width="76">&nbsp;</td>
+      <th width="49">No</th>
+      <th width="91">Title</th>
+      <th width="70">Description</th>
+      <th width="70">Submission Date </th>
+        <th width="70">Uploaded Date</th>
+      <th width="70">&nbsp;</th>
+      <th width="70">&nbsp;</th>
+      <th width="76">&nbsp;</th>
     </tr>
       {% for i in sub %}
     <tr>
@@ -26,13 +20,12 @@
       <td>&nbsp;{{ i['description'] }}</td>
       <td>&nbsp;{{ i['sdate'] }}</td>
       <td>&nbsp;{{ i['udate'] }}</td>
-      <td><a href="/teamleader_edit_subduties/{{ i['sub_id']}}">Edit</a></td>
-      <td><a href="/teamleader_delete_subduties/{{ i['sub_id']}}">Delete</a></td>
-      <td><a href="/teamleader_assign_subduty/{{ i['sub_id'] }}">Assign</a></td>
+      <td><a href="/teamleader_edit_subduties/{{ i['sub_id']}}" class="btn btn-outline-info">Edit</a></td>
+      <td><a href="/teamleader_delete_subduties/{{ i['sub_id']}}" class="btn btn-outline-danger">Delete</a></td>
+      <td><a href="/teamleader_assign_subduty/{{ i['sub_id'] }}" class="btn btn-outline-success">Assign</a></td>
     </tr>
       {% endfor %}
   </table>
 </form>
 
-</body>
-</html>
+{% endblock %}

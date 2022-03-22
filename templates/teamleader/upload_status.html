@@ -1,29 +1,23 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Untitled Document</title>
-</head>
-
-<body>
+{% extends "teamleader/index.html" %}
+{% block body %}
 <form action="/teamleader_upload_status_insert" method="post" enctype="multipart/form-data" name="form1" id="form1">
-<table width="433" height="125" border="0" align="center">
+<h3>Upload Status</h3>
+<table class="table">
   <tr>
-    <td width="145">Status<input type="hidden" value="{{ a['work_id'] }}" name="work_id"></td>
-    <td width="272"><label for="fileField"></label>
-      <input type="file" name="fileField" id="fileField" value="Choose File"/></td>
+    <td width="145">Status<input type="hidden" value="{{ a['work_id'] }}" name="work_id" class="form-control"></td>
+    <td width="272">
+      <input type="file" name="fileField" id="fileField" value="Choose File" class="form-control"/></td>
   </tr>
     <tr>
     <td>Description</td>
-    <td><label for="textfield"></label>
-      <input type="text" name="textfield" id="textfield" /></td>
+    <td>
+      <input type="text" name="textfield" id="textfield" class="form-control"/></td>
   </tr>
   <tr>
     <td>&nbsp;</td>
-    <td><input type="submit" name="button" id="button" value="Upload" /></td>
+    <td><input type="submit" name="button" id="button" value="Upload" class="btn btn-success" /></td>
   </tr>
 </table>
 </form>
-</body>
-</html>
 
+{% endblock %}

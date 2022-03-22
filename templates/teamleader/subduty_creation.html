@@ -1,41 +1,34 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Untitled Document</title>
-</head>
-
-<body>
+{% extends "teamleader/index.html" %}
+{% block body %}
 	<form action="/teamleader_subduty_creation_post" method="post">
     <h3 align="center">Subduty Creation </h3>
-	  <table align="center">
+	  <table class="table">
 	    <tr>
-            <td>Title<input type="hidden" value="{{ a["work_id"] }}" name="wid"></td>
-	      <td><label for="textfield"></label>
-          <input type="text" name="textfield" id="textfield" /></td>
+            <td>Title<input type="hidden" value="{{ a["work_id"] }}" name="wid" class="form-control"></td>
+	      <td>
+          <input type="text" name="textfield" id="textfield" class="form-control"/></td>
         </tr>
 	    <tr>
 	      <td>Description</td>
-	      <td><label for="textfield2"></label>
-          <input type="text" name="textfield2" id="textfield2" /></td>
+	      <td>
+          <input type="text" name="textfield2" id="textfield2" class="form-control"/></td>
         </tr>
 	    <tr>
 	      <td>Submission Date </td>
-	      <td><label for="textfield3"></label>
-          <input type="date" name="textfield3" id="textfield3" /></td>
+	      <td>
+          <input type="date" name="textfield3" id="textfield3" class="form-control"/></td>
         </tr>
 	    
         <tr>
 	      <td>Uploading Date </td>
-	      <td><label for="textfield4"></label>
-          <input type="date" name="textfield4" id="textfield4" /></td>
+	      <td>
+          <input type="date" name="textfield4" id="textfield4" class="form-control"/></td>
         </tr>
 	    <tr>
 	      <td>&nbsp;</td>
-	      <td><input type="submit" name="button" id="button" value="Create" /></td>
+	      <td><input type="submit" name="button" id="button" value="Create" class="btn btn-success"/></td>
         </tr>
       </table>
     
     </form>
-</body>
-</html>
+{% endblock %}

@@ -9,6 +9,14 @@ app.secret_key="kkkk"
 def index_login():
     return render_template('index.html')
 
+@app.route('/admin_index')
+def admin_index():
+    return render_template('admin/index.html')
+
+@app.route('/teamleader_index')
+def teamleader_index():
+    return render_template('teamleader/index.html')
+
 @app.route('/login')
 def login():
    return render_template('login.html')
@@ -22,14 +30,14 @@ def login_post():
     res=rd.selectOne(qry)
     if res is not None:
         if res['type']=="admin":
-            return render_template("admin/Home.html")
+            return render_template("admin/index.html")
         elif res['type']=="leader":
             session["lid"]=res["lid"]
             q="SELECT dept_id FROM team_leader WHERE staff_id='"+str(session["lid"])+"'"
             d=Db()
             r=d.selectOne(q)
             session["dpid"]=r["dept_id"]
-            return render_template("teamleader/Home.html")
+            return render_template("teamleader/index.html")
         else:
             return "<script>alert('Invalid username or password'); window.location='/'</script>"
     else:
@@ -560,8 +568,6 @@ def teamleader_delete_assignedsubduty(subid):
     d = Db()
     d.delete(q)
     return '''<script>alert('successfully deleted');window.location='/teamleader_view_assigned_subduty'</script>'''
-
-
 
 if __name__ == '__main__':
     app.run(debug=True)

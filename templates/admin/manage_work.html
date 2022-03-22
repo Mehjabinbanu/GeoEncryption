@@ -1,19 +1,19 @@
 {% extends "admin/index.html" %}
 {% block body %}
 <form id="form1" name="form1" method="post" action="">
-<h2 align="center">Manage work</h2>
-  <table width="618" height="117" border="1" align="center">
+<h3 align="center">Manage work</h3>
+  <table class="table">
     <tr>
-      <td width="49">No</td>
-      <td width="91">Title</td>
-        <td width="91">Department</td>
-      <td width="70">Description</td>
-      <td width="70">Submission Date </td>
-      <td width="70"> Submission Time</td>
-        <td width="70">Uploaded Date</td>
-      <td width="70">&nbsp;</td>
-      <td width="70">&nbsp;</td>
-      <td width="76">&nbsp;</td>
+      <th width="49">No</th>
+      <th width="91">Title</th>
+        <th width="91">Department</th>
+      <th width="70">Description</th>
+      <th width="70">Submission Date </th>
+      <th width="70"> Submission Time</th>
+        <th width="70">Uploaded Date</th>
+      <th width="70">&nbsp;</th>
+      <th width="70">&nbsp;</th>
+      <th width="76">&nbsp;</th>
     </tr>
       {% for i in a %}
     <tr>
@@ -24,9 +24,9 @@
       <td>&nbsp;{{ i['sdate'] }}</td>
       <td>&nbsp;{{ i['stime'] }}</td>
         <td>&nbsp;{{ i['uploaddate'] }}</td>
-      <td><a href="/admin_edit_works/{{ i["work_id"] }}">Edit</a></td>
-      <td><a href="/admin_delete_works/{{ i["work_id"] }}">Delete</a></td>
-      <td><a href="/admin_work_assign/{{ i["work_id"] }}">Assign</a></td>
+      <td><a href="/admin_edit_works/{{ i["work_id"] }}"class="btn btn-outline-info">Edit</a></td>
+      <td><a href="/admin_delete_works/{{ i["work_id"] }}"class="btn btn-outline-danger">Delete</a></td>
+      <td><a href="/admin_work_assign/{{ i["work_id"] }}" class="btn btn-outline-success">Assign</a></td>
     </tr>
       {% endfor %}
   </table>

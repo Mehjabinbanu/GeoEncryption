@@ -1,40 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-    <title>edit_subduty</title>
-</head>
-<body>
+{% extends "teamleader/index.html" %}
+{% block body %}
 <form action="/teamleader_edit_subduties_post" method="post">
     <h3 align="center">Edit subduty</h3>
-	  <table width="406" height="172" border="0" align="center">
+	  <table class="table">
 	    <tr>
-	      <td width="203">Title<input type="hidden" value="{{ sd["sub_id"] }}" name="sub_id"></td>
-	      <td width="187"><label for="textfield"></label>
-          <input type="text" name="textfield" id="textfield" value="{{ sd["title"] }}"></td>
+	      <td width="203">Title<input type="hidden" value="{{ sd["sub_id"] }}" name="sub_id" class="form-control"></td>
+	      <td width="187">
+          <input type="text" name="textfield" id="textfield" value="{{ sd["title"] }}" class="form-control"></td>
         </tr>
 	    <tr>
 	      <td>Description</td>
-	      <td><label for="textfield2"></label>
-          <input type="text" name="textfield2" id="textfield2" value="{{ sd["description"] }}"/></td>
+	      <td>
+          <input type="text" name="textfield2" id="textfield2" value="{{ sd["description"] }}" class="form-control"/></td>
         </tr>
 	    <tr>
 	      <td>Submission Date </td>
-	      <td><label for="textfield3"></label>
-          <input type="date" name="textfield3" id="textfield3" value="{{ sd["sdate"] }}"/></td>
+	      <td>
+          <input type="date" name="textfield3" id="textfield3" value="{{ sd["sdate"] }}" class="form-control"/></td>
         </tr>
 	    
           <tr>
 	      <td>Uploaded Date</td>
-	      <td><label for="textfield4"></label>
-          <input type="date" name="textfield4" id="textfield4" value="{{ sd["udate"] }}"/></td>
+	      <td>
+          <input type="date" name="textfield4" id="textfield4" value="{{ sd["udate"] }}" class="form-control"/></td>
         </tr>
 	    <tr>
 	      <td>&nbsp;</td>
-	      <td><input type="submit" name="button" id="button" value="Update" /></td>
+	      <td><input type="submit" name="button" id="button" value="Update" class="btn btn-success"/></td>
         </tr>
       </table>
 
     </form>
-</body>
-</html>
+
+{% endblock %}

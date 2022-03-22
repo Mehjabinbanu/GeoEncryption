@@ -1,12 +1,12 @@
 {% extends "admin/index.html" %}
 {% block body %}
 <form action="/admin_work_assign_insert" method="post">
-<h2 align="center">Work Assignment </h2>
-    <table width="422" height="67" border="0" align="center">
+<h3 align="left">Work Assignment </h3>
+    <table class="table">
        <tr>
     <td align="center">Team leader</td>
-    <td><label for="select"><input type="hidden" value="{{ work_id }}" name="work_id"> </label>
-      <select name="select" id="select">
+    <td><input type="hidden" value="{{ work_id }}" name="work_id">
+      <select name="select" id="select" class="form-control">
           <option>--select--</option>
           {% for i in leader %}
           <option value="{{ i['lid'] }}"> {{ i['name'] }}</option>
@@ -15,7 +15,7 @@
   </tr>
     <tr>
       <td>&nbsp;</td>
-      <td><input type="submit" name="button" id="button" value="Assign" /></td>
+      <td><input type="submit" name="button" id="button" value="Assign" class="btn btn-success" /></td>
     </tr>
     </table>
 </form>

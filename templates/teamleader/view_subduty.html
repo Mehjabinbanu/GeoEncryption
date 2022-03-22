@@ -1,35 +1,29 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Untitled Document</title>
-</head>
-
-<body>
+{% extends "teamleader/index.html" %}
+{% block body %}
 <form id="form1" name="form1" method="post" action="/teamleader_assigned_subduty_search">
-  <table width="480" height="54" border="0" align="center">
+  <table class="table">
     <tr>
       <td width="130">Staff</td>
-      <td width="156"><label for="select"></label>
-        <select name="select" id="select"><option>--Select--</option>
+      <td width="156">
+        <select name="select" id="select" class="form-control"><option>--Select--</option>
             {% for i in staff %}
           <option value="{{ i['staff_id'] }}"> {{ i['name'] }}</option>
           {% endfor %}
       </select></td>
-      <td width="172"><input type="submit" name="button" id="button" value="View" /></td>
+      <td width="172"><input type="submit" name="button" id="button" value="View" class="btn btn-info"/></td>
     </tr>
   </table>
   
-  <h2 align="center">Assigned subduties</h2>
-  <table width="766" height="204" border="1" align="center">
+  <h3 align="center">Assigned subduties</h3>
+  <table class="table table-bordered">
     <tr>
-      <td width="64" align="center">No</td>
-      <td width="147" align="center">Title</td>
-      <td width="177" align="center">Description</td>
-      <td width="124" align="center">Submission Date</td>
-      <td width="121" align="center">Uploading Date</td>
-      <td width="121" align="center">&nbsp;
-        <td width="121" align="center">&nbsp;</td>
+      <th width="64" align="center">No</th>
+      <th width="147" align="center">Title</th>
+      <th width="177" align="center">Description</th>
+      <th width="124" align="center">Submission Date</th>
+      <th width="121" align="center">Uploading Date</th>
+      <th width="121" align="center">&nbsp;
+        <th width="121" align="center">&nbsp;</th>
     </tr>
     {% for i in sub %}
 
@@ -40,13 +34,13 @@
       
       <td>{{ i['sdate'] }}</td>
       <td>{{ i['udate'] }}</td>
-        <td><a href="/teamleader_view_status/{{ i["sub_id"] }}">View status</a></td>
-      <td><a href="/teamleader_delete_assignedsubduty/{{ i["sub_id"] }}">Delete</a></td>
+        <td><a href="/teamleader_view_status/{{ i["sub_id"] }}" class="btn btn-outline-info">View status</a></td>
+      <td><a href="/teamleader_delete_assignedsubduty/{{ i["sub_id"] }}" class="btn btn-outline-danger">Delete</a></td>
     </tr>
     {% endfor %}
   </table>
   <p align="center">&nbsp;</p>
   <p>&nbsp;</p>
 </form>
-</body>
-</html>
+
+{% endblock %}

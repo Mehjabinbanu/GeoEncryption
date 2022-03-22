@@ -1,28 +1,28 @@
 {% extends "admin/index.html" %}
 {% block body %}
 <form id="form1" name="form1" method="post" action="/admin_add_dept_post">
-<h3 align="center">Add Department</h3>
-  <table width="378" height="107" border="0" align="center">
+<h3 align="left">Add Department</h3>
+  <table class="table">
     <tr>
       <td width="203">Department Name :</td>
-      <td width="165"><label for="textfield"></label>
-      <input type="text" name="textfield" id="textfield" /></td>
+      <td>
+      <input type="text" name="textfield" id="textfield" class="form-control" /></td>
     </tr><tr>
       <td width="203">Place :</td>
-      <td width="165"><label for="textfield2"></label>
-      <input type="text" name="textfield2" id="textfield2" /></td>
+      <td>
+      <input type="text" name="textfield2" id="textfield2" class="form-control"/></td>
     </tr><tr>
       <td width="203">Latitude :</td>
-      <td width="165"><label for="textfield3"></label>
-      <input type="text" name="textfield3" id="textfield3" /></td>
+      <td>
+      <input type="text" name="textfield3" id="textfield3" class="form-control"/></td>
     </tr><tr>
       <td width="203">Longitude :</td>
-      <td width="165"><label for="textfield"4></label>
-      <input type="text" name="textfield4" id="textfield4" /></td>
+      <td>
+      <input type="text" name="textfield4" id="textfield4" class="form-control" /></td>
     </tr>
     <tr>
       <td>&nbsp;</td>
-      <td><input type="submit" name="button" id="button" value="ADD" /></td>
+      <td><input type="submit" name="button" id="button" value="ADD"  class="btn btn-success"/></td>
     </tr>
   </table>
 </form>

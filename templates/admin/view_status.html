@@ -1,13 +1,15 @@
 {% extends "admin/index.html" %}
 {% block body %}
-<form action="/admin_view_status" method="post"><table width="307" border="1" align="center">
+<form action="/admin_view_status" method="post">
+    <h3>Status</h3>
+    <table class="table table-bordered">
   <tr>
-    <td width="92">Status</td>
+    <th width="92">Status</th>
       <td width="199"><a href="{{ i['file']}}" download >{{ i['file']}}</a></td>
 
   </tr>
   <tr>
-    <td>Description</td>
+    <th>Description</th>
     <td>&nbsp;{{ i['description'] }}</td>
   </tr>
 </table>
