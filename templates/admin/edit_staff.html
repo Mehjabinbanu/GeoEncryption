@@ -1,10 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "admin/index.html" %}
+{% block body %}
     <form action="/admin_edit_staff_post" method="post" enctype="multipart/form-data" name="form1" id="form1">
 <h2 align="center">Edit Staff</h2>
   <table width="504" border="0" align="center">
@@ -97,5 +92,4 @@
     </tr>
   </table>
 </form>
-</body>
-</html>
+{% endblock %}

@@ -1,10 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "admin/index.html" %}
+{% block body %}
 <form action="/admin_work_assign_insert" method="post">
 <h2 align="center">Work Assignment </h2>
     <table width="422" height="67" border="0" align="center">
@@ -24,5 +19,4 @@
     </tr>
     </table>
 </form>
-</body>
-</html>
+{% endblock %}
